@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia&effect=neon|outline|emboss|shadow-multiple">
+    <title>Deep Recon</title>
+    <style>
+        .font-effect-neon {
+             margin-bottom: 10px;
+            text-shadow: 0 0 0.1em rgba(0, 255, 0, 0.6),
+                0 0 0.2em rgba(0, 255, 0, 0.6),
+                0 0 0.3em rgba(0, 255, 0, 0.6),
+                0 0 0.4em rgba(0, 255, 0, 0.6),
+                0 0 0.6em rgba(0, 255, 0, 0.6),
+                0 0 0.8em rgba(0, 255, 0, 0.6),
+                0 0 1.0em rgba(0, 255, 0, 0.6),
+                0 0 1.2em rgba(0, 255, 0, 0.6);
+            color: #fff;
+        }
+        body::-webkit-scrollbar {
+    width: 0; /* Set the width of the scrollbar to 0 */
+    background: transparent; /* Set the background color of the scrollbar to transparent */
+}
+
+        body {
+            margin: 0;
+            padding: 0;
+        
+            overflow-y: auto;
+            font-family: "Sofia", sans-serif;
+            font-size: 30px;
+            color: #fff;
+            scrollbar-width: none;
+
+        }
+
+        #tsparticles {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+        }
+
+        .input-container {
+            position: absolute;
+            top: 14%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 999;
+        }
+
+        .input {
+            color: #ffffff;
+            border: 2px solid #07ff8b;
+            border-radius: 10px;
+            padding: 10px 25px;
+            background: transparent;
+            max-width: 300px; /* Increase the max-width if you want a wider input */
+            width: 100%; /* Make the input field span the full width of its container */
+            font-size: 18px; /* Adjust the font size if necessary */
+        }
+
+        .input:focus {
+            outline: none;
+            box-shadow: 0 0 5px #06ff0e;
+        }
+
+        /* Grid container for buttons */
+        .button-container {
+            padding-left: 30px;
+            padding-top: 300px;
+            padding-bottom: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: grid;
+            grid-template-columns: repeat(5, 1fr); /* 5 columns */
+            gap: 25px; /* Gap between buttons */
+        }
+
+        /* Style for buttons */
+        .button {
+            color: #fffefeb9;
+            border: 2px solid #07ff8b;
+            border-radius: 20px;
+            padding: 14px 45px; /* Increased padding */
+            background: transparent;
+            font-size: 20px; /* Increased font size */
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .button:hover {
+            background-color: #07ff8b;
+            color: #000000;
+        }
+    </style>
+</head>
+<body>
+    <div id="tsparticles"></div>
+
+    <div class="input-container">
+        <h1 class="font-effect-neon">Deep Recon</h1>
+        <input type="text" id="domainInput" class="input" placeholder="Enter the Target Domain...">
+    </div>
+
+    <!-- Button container -->
+    <div class="button-container">
+        <!-- Buttons -->
+        <button class="button" onclick="openUrl('Directory Listing')">Directory Listing</button>
+        <button class="button" onclick="openUrl('Configuration Files')">Configuration Files</button>
+        <button class="button" onclick="openUrl('Database Files')">Database Files</button>
+        <button class="button" onclick="openUrl('Log Files')">Log Files</button>
+        <button class="button" onclick="openUrl('Login Pages')">Login Pages</button>
+        <button class="button" onclick="openUrl('SQL Errors')">SQL Errors</button>
+        <button class="button" onclick="openUrl('Robots.txt')">Robots.txt</button>
+        <button class="button" onclick="openUrl('Apache Files')">Apache Files</button>
+        <button class="button" onclick="openUrl('Exposed-Docs')">Exposed-Docs</button>
+        <button class="button" onclick="openUrl('Open Redirects')">Open Redirects</button>
+        <button class="button" onclick="openUrl('Sub Domains')">Sub Domains</button>
+        <button class="button" onclick="openUrl('Sub-Sub Domains')">Sub-Sub Domains</button>
+        <button class="button" onclick="openUrl('S3 Buckets')">S3 Buckets</button>
+        <button class="button" onclick="openUrl('.Git Folder')">.Git Folder</button>
+        <button class="button" onclick="openUrl('Shodan')">Shodan</button>
+        <button class="button" onclick="openUrl('.ht access_files')">.ht access_files</button>
+        <button class="button" onclick="openUrl('PasteBin Entries')">PasteBin Entries</button>
+        <button class="button" onclick="openUrl('Source Code')">Source Code</button>
+        <button class="button" onclick="openUrl('Github')">Github</button>
+        <button class="button" onclick="openUrl('Github Gist')">Github Gist</button>
+    </div>
+
+    <!-- tsParticles library -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
+    <script>
+        const options = {
+            background: {
+                color: "#000",
+            },
+            particles: {
+                links: {
+                    enable: true,
+                    opacity: 0.3,
+                    distance: 200,
+                },
+                move: {
+                    enable: true,
+                    speed: { min: 1, max: 3 },
+                },
+                opacity: {
+                    value: { min: 0.3, max: 0.7 },
+                },
+                size: {
+                    value: { min: 1, max: 2.8 },
+                },
+            },
+            interactivity: {
+                detectsOn: "canvas",
+                events: {
+                    onHover: {
+                        enable: true,
+                        mode: "repulse",
+                    },
+                },
+            }
+        };
+
+        tsParticles.load("tsparticles", options);
+
+        function openUrl(category) {
+            const domain = encodeURIComponent(document.getElementById('domainInput').value);
+            if (domain === "") {
+                alert("Please enter the target domain.");
+                return;
+            }
+            const urlMap = {
+                "Directory Listing": `https://www.google.com/search?q=site:${domain} intitle:index.of`,
+                "Configuration Files": `https://www.google.com/search?q=site:${domain} filetype:ini OR filetype:config OR filetype:cfg`,
+                "Database Files": `https://www.google.com/search?q=site:${domain} intitle:"Index of /" + .sql`,
+                "Log Files": `https://www.google.com/search?q=site:${domain} intitle:"Index of /" + .log`,
+                "Login Pages": `https://www.google.com/search?q=site:${domain} inurl:login OR inurl:signin OR inurl:logon`,
+                "SQL Errors": `https://www.google.com/search?q=site:${domain} intext:"sql syntax near"`,
+                "Robots.txt": `https://www.google.com/search?q=site:${domain} robots.txt`,
+                "Apache Files": `https://www.google.com/search?q=site:${domain} intitle:"Index of /" + .htaccess OR intitle:"Index of /" + .htpasswd`,
+                "Exposed-Docs": `https://www.google.com/search?q=site:${domain} intitle:"Index of /" + "docs"`,
+                "Open Redirects": `https://www.google.com/search?q=site:${domain} inurl:redir OR inurl:redirect OR inurl:return OR inurl:go`,
+                "Sub Domains": `https://www.google.com/search?q=site:*.${domain}`,
+                "Sub-Sub Domains": `https://www.google.com/search?q=site:*.*.${domain}`,
+                "S3 Buckets": `https://buckets.grayhatwarfare.com/bucketsearch?domain=${domain}`,
+                ".Git Folder": `https://www.google.com/search?q=site:${domain} inurl:.git`,
+                "Shodan": `https://www.shodan.io/search?query=${domain}`,
+                ".ht access_files": `https://www.google.com/search?q=site:${domain} intitle:"Index of /" + ".htaccess" OR intitle:"Index of /" + ".htpasswd"`,
+                "PasteBin Entries": `https://pastebin.com/search?q=${domain}`,
+                "Source Code": `https://www.google.com/search?q=site:${domain} intitle:"Index of /" + "src" OR intitle:"Index of /" + "source"`,
+                "Github": `https://github.com/search?q=${domain}`,
+                "Github Gist": `https://gist.github.com/search?q=${domain}`,
+            };
+
+            const url = urlMap[category];
+            if (url) {
+                window.open(url, '_blank');
+            } else {
+                alert('URL not configured for this category');
+            }
+        }
+    </script>
+</body>
+</html>
