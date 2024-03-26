@@ -7,7 +7,7 @@
     <title>Deep Recon</title>
     <style>
         .font-effect-neon {
-             margin-bottom: 10px;
+             margin-bottom: 0.2vw;
             text-shadow: 0 0 0.1em rgba(0, 255, 0, 0.6),
                 0 0 0.2em rgba(0, 255, 0, 0.6),
                 0 0 0.3em rgba(0, 255, 0, 0.6),
@@ -77,7 +77,7 @@
             transform: translate(-50%, -50%);
             display: grid;
             grid-template-columns: repeat(5, 1fr); /* 5 columns */
-            gap: 25px; /* Gap between buttons */
+            gap: 2vw; /* Gap between buttons */
         }
 
         /* Style for buttons */
@@ -96,62 +96,110 @@
             background-color: #07ff8b;
             color: #000000;
         }
-        @media only screen and (max-width: 768px) {
-        /* Hide desktop content */
-        .desktop-content {
-            display: none;
+        @media only screen and (max-width: 600px) {
+            /* Hide desktop content */
+            .desktop-content {
+                display: none;
+            }
+
+            /* Show mobile content */
+            .mobile-content {
+                display: block;
+            }
+
+            /* Style for mobile input container */
+            .input-container {
+                text-align: center;
+                margin-top: 20px;
+                margin-bottom: 20px;
+            }
+
+            /* Style for mobile buttons */
+            .mobile-button-container {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr); /* 2 columns */
+                grid-template-rows: repeat(10, auto); /* 10 rows */
+                gap: 10px; /* Gap between buttons */
+
+                padding-left: 30px;
+                padding-top: 300px;
+                padding-bottom: 20px;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+                display: grid;
+                gap: 2vw; /* Gap between buttons */
+        }
+            }
+            .mobile-button-container .button {
+                padding: 10px 20px; /* Adjust padding as needed */
+                font-size: 16px; /* Adjust font size as needed */
+            }
+
+            /* Style for mobile buttons */
+            .button {
+                padding: 10px 20px; /* Adjust padding as needed */
+                font-size: 16px; /* Adjust font size as needed */
+            }
         }
 
-        /* Show mobile content */
-        .mobile-content {
-            display: block;
-        }
+        /* Additional styles for desktop */
+        @media only screen and (min-width: 769px) {
+            /* Hide mobile content */
+            .mobile-content {
+                display: none;
+            }
 
-        /* Style for mobile input container */
-        .input-container {
-            text-align: center;
-            margin-top: 20px;
-            margin-bottom: 20px;
+            /* Show desktop content */
+            .desktop-content {
+                display: block;
+            }
         }
-
-        /* Style for mobile buttons */
-        .mobile-button-container {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr); /* 2 columns */
-            grid-template-rows: repeat(10, auto);
-            gap: 10px; /* Gap between buttons */
-        }
-
-        /* Style for mobile buttons */
-        .button {
-            padding: 10px 20px; /* Adjust padding as needed */
-            font-size: 16px; /* Adjust font size as needed */
-        }
-    }
-
-    /* Additional styles for desktop */
-    @media only screen and (min-width: 769px) {
-        /* Hide mobile content */
-        .mobile-content {
-            display: none;
-        }
-
-        /* Show desktop content */
-        .desktop-content {
-            display: block;
-        }
-    }
     </style>
 </head>
 <body>
     <div id="tsparticles"></div>
+        <div class="mobile-content">
+            <h1 class="font-effect-neon">Deep Recon</h1>
+            <div class="input-container">
+                <input type="text" id="domainInput" class="input" placeholder="Enter the Target Domain...">
+            </div>
+
+            <!-- Button container for mobile -->
+            <div class="mobile-button-container">
+                 <!-- Buttons -->
+                    <button class="button" onclick="openUrl('Directory Listing')">Directory Listing</button>
+                    <button class="button" onclick="openUrl('Configuration Files')">Configuration Files</button>
+                    <button class="button" onclick="openUrl('Database Files')">Database Files</button>
+                    <button class="button" onclick="openUrl('Log Files')">Log Files</button>
+                    <button class="button" onclick="openUrl('Login Pages')">Login Pages</button>
+                    <button class="button" onclick="openUrl('SQL Errors')">SQL Errors</button>
+                    <button class="button" onclick="openUrl('Robots.txt')">Robots.txt</button>
+                    <button class="button" onclick="openUrl('Apache Files')">Apache Files</button>
+                    <button class="button" onclick="openUrl('Exposed-Docs')">Exposed-Docs</button>
+                    <button class="button" onclick="openUrl('Open Redirects')">Open Redirects</button>
+                    <button class="button" onclick="openUrl('Sub Domains')">Sub Domains</button>
+                    <button class="button" onclick="openUrl('Sub-Sub Domains')">Sub-Sub Domains</button>
+                    <button class="button" onclick="openUrl('S3 Buckets')">S3 Buckets</button>
+                    <button class="button" onclick="openUrl('.Git Folder')">.Git Folder</button>
+                    <button class="button" onclick="openUrl('Shodan')">Shodan</button>
+                    <button class="button" onclick="openUrl('.ht access_files')">.ht access_files</button>
+                    <button class="button" onclick="openUrl('PasteBin Entries')">PasteBin Entries</button>
+                    <button class="button" onclick="openUrl('Source Code')">Source Code</button>
+                    <button class="button" onclick="openUrl('Github')">Github</button>
+                    <button class="button" onclick="openUrl('Github Gist')">Github Gist</button>
+            </div>
+        </div>
+    <!-- Content for desktop -->
+<div class="desktop-content">
 
     <div class="input-container">
         <h1 class="font-effect-neon">Deep Recon</h1>
         <input type="text" id="domainInput" class="input" placeholder="Enter the Target Domain...">
     </div>
 
-    <!-- Button container -->
+    <!-- Button container for desktop -->
     <div class="button-container">
         <!-- Buttons -->
         <button class="button" onclick="openUrl('Directory Listing')">Directory Listing</button>
@@ -175,6 +223,7 @@
         <button class="button" onclick="openUrl('Github')">Github</button>
         <button class="button" onclick="openUrl('Github Gist')">Github Gist</button>
     </div>
+</div>
 
     <!-- tsParticles library -->
     <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
